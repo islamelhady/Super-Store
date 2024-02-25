@@ -9,21 +9,21 @@
       android:translateY="140">
     <path
         android:pathData="M165.8,412.2m-36.3,0a36.3,36.3 0,1 1,72.6 0a36.3,36.3 0,1 1,-72.6 0"
-        android:fillColor="#323C57"/>
+        android:fillColor="#ffffff"/>
     <path
         android:pathData="M372.6,412.2m-36.3,0a36.3,36.3 0,1 1,72.6 0a36.3,36.3 0,1 1,-72.6 0"
-        android:fillColor="#323C57"/>
+        android:fillColor="#ffffff"/>
     <path
         android:pathData="M292.5,112.9l-207.5,0l17.7,40.4l379.5,0l17.8,-40.4z"
-        android:fillColor="#1C95E2"/>
+        android:fillColor="#ffffff"/>
     <path
         android:pathData="M162.5,289.4l130,0l129.9,0l17.8,-40.5l-295.4,0z"
-        android:fillColor="#1C95E2"/>
+        android:fillColor="#ffffff"/>
     <path
         android:pathData="M132.6,221.3l319.7,0l17.8,-40.3l-355.2,0z"
-        android:fillColor="#1C95E2"/>
+        android:fillColor="#ffffff"/>
     <path
         android:pathData="M410.8,315.8H141.6L35.4,62.7c-3.9,-9.3 -14.7,-13.8 -24.2,-9.9C1.9,56.7 -2.5,67.5 1.4,77l110.2,262.7c2.1,5.1 6.3,8.7 11.1,10.3c2.8,1.7 6.1,2.8 9.7,2.8h278.4c10.1,0 18.4,-8.3 18.4,-18.4C429.2,324.1 420.9,315.8 410.8,315.8z"
-        android:fillColor="#323C57"/>
+        android:fillColor="#ffffff"/>
   </group>
 </vector>
