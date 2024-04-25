@@ -13,4 +13,13 @@
         <item name="android:statusBarColor" tools:targetApi="l">@color/app_background</item>
 
     </style>
+
+    <style name="Theme.App.Starting" parent="Theme.SuperStore">
+        <!-- Set the splash screen background, animated icon, and animation duration. -->
+        <item name="windowSplashScreenBackground">@color/app_background</item>
+        <item name="android:windowBackground">@drawable/splash_image</item>
+        <!--        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_foreground</item> &lt;!&ndash; To add a drawable or an animated drawable. One of these is required. &ndash;&gt;-->
+        <item name="windowSplashScreenAnimationDuration">200</item> <!-- Required for animated icons. -->
+        <item name="postSplashScreenTheme">@style/Theme.SuperStore</item> <!-- Set the theme of the Activity that directly follows your splash screen. This is required. -->
+    </style>
 </resources>
