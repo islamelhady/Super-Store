@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "463623305926",
+    "project_id": "super-store-elhady",
+    "storage_bucket": "super-store-elhady.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463623305926:android:94fbba1e2b0d047ce6b5c7",
+        "android_client_info": {
+          "package_name": "com.elhady.superstore"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3K-iigqB7dxdhPWHXtUkGrxaLqB2SAjc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
