@@ -32,6 +32,10 @@ class HomeFragment : Fragment() {
         homeViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
+
+        textView.setOnClickListener {
+            throw RuntimeException("Test Crash") // Force a crash
+        }
         return root
     }
 

@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.googleServices)
+    alias(libs.plugins.googleCrashlytics)
 }
 
 android {
@@ -57,6 +58,10 @@ dependencies {
     // Firebase
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
+
+    // third party libraries - reactivenetwork
+    implementation(libs.reactivenetwork)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
