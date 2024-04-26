@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.googleServices)
     alias(libs.plugins.googleCrashlytics)
+    alias(libs.plugins.kotlinKapt)
 }
 
 android {
@@ -38,6 +39,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        dataBinding = true
     }
 }
 
