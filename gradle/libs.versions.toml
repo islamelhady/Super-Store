@@ -17,6 +17,7 @@ google-services = "4.4.1"
 firebase-bom = "32.8.1"
 firebase-crashlytics = "2.9.9"
 reactivenetwork = "3.0.8"
+legacy-support-v4 = "1.0.0"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -35,6 +36,7 @@ firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.r
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
 reactivenetwork = { group = "com.github.pwittchen", name = "reactivenetwork-rx2", version.ref = "reactivenetwork" }
+legacy-support-v4 = { group = "androidx.legacy", name = "legacy-support-v4", version.ref = "legacy-support-v4" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

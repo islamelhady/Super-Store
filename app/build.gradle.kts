@@ -64,6 +64,7 @@ dependencies {
 
     // third party libraries - reactivenetwork
     implementation(libs.reactivenetwork)
+    implementation(libs.legacy.support.v4)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
