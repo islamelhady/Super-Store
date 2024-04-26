@@ -16,7 +16,7 @@ splash-screen = "1.0.1"
 google-services = "4.4.1"
 firebase-bom = "32.8.1"
 firebase-crashlytics = "2.9.9"
-reactivenetwork = "rx2:3.0.8"
+reactivenetwork = "3.0.8"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -34,8 +34,7 @@ splash-screen = {group = "androidx.core", name = "core-splashscreen", version.re
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
-reactivenetwork = { group = "com.github.pwittchen", name = "reactivenetwork", version.ref = "reactivenetwork" }
-
+reactivenetwork = { group = "com.github.pwittchen", name = "reactivenetwork-rx2", version.ref = "reactivenetwork" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
