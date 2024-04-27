@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.googleServices)
     alias(libs.plugins.googleCrashlytics)
     alias(libs.plugins.kotlinKapt)
+    alias(libs.plugins.kotlinParcelize)
 }
 
 android {
