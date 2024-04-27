@@ -3,11 +3,7 @@
     android:height="800dp"
     android:viewportWidth="30"
     android:viewportHeight="30">
-  <path
-      android:pathData="M5.1,0L24.9,0A5.1,5.1 0,0 1,30 5.1L30,24.9A5.1,5.1 0,0 1,24.9 30L5.1,30A5.1,5.1 0,0 1,0 24.9L0,5.1A5.1,5.1 0,0 1,5.1 0z"
-      android:strokeWidth="0"
-      android:fillColor="#ffffff"
-      android:strokeColor="#ffffff"/>
+
   <path
       android:pathData="M19.5,10.135L20.56,10.135L21.62,23.675C21.64,23.965 21.41,24.215 21.12,24.215L7.38,24.255C7.09,24.255 6.86,24.005 6.88,23.715L7.86,10.175L8.96,10.175"
       android:strokeLineJoin="bevel"
