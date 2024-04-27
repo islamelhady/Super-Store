@@ -19,7 +19,7 @@
             android:name=".ui.authentication.AuthenticationActivity"
             android:exported="false"
             android:label="@string/title_activity_authentication"
-            android:theme="@style/Theme.App.Starting" />
+            android:theme="@style/Base.Theme.SuperStore" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
