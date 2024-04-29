@@ -68,6 +68,8 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.firestore.ktx)
+    implementation(libs.firebase.auth)
 
     // third party libraries - reactive network
     implementation(libs.reactivenetwork)
