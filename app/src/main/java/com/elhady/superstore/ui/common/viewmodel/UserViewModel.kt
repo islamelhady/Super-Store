@@ -21,7 +21,7 @@ class UserViewModel(
     suspend fun saveLoginState(isLoggedIn: Boolean) {
     }
 
-    suspend fun isUserLoggedIn() = appPreferenceRepository.isLoggedIn()
+    suspend fun isUserLoggedIn() = false
 
 }
 

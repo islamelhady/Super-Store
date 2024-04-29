@@ -43,6 +43,7 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initViewModel()
+        loginViewModel.loginWithEmailAndPassword()
     }
 
     private fun initViewModel() {
@@ -55,7 +56,7 @@ class LoginFragment : Fragment() {
 
                     is Resource.Success -> {
                         progressDialog.dismiss()
-                        goToHome()
+                        view?.showSnakeBarError("success" + resource.data!!.email.toString())
                     }
 
                     is Resource.Error -> {

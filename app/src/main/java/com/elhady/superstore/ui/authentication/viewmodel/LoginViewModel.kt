@@ -1,6 +1,7 @@
 package com.elhady.superstore.ui.authentication.viewmodel
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -56,6 +57,7 @@ class LoginViewModel(
                 when (resource) {
                     is Resource.Success -> {
                         savePreferenceData(resource.data!!)
+                        Log.d("success id", resource.data.id.toString())
                         _loginState.emit(Resource.Success(resource.data))
                     }
 

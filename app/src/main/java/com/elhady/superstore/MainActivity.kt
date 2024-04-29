@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         installSplashScreen()
 
-        val isLoggedIn = runBlocking { userViewModel.isUserLoggedIn().first() }
+        val isLoggedIn = runBlocking { userViewModel.isUserLoggedIn() }
         if (!isLoggedIn) {
             goToAuthActivity()
             return
