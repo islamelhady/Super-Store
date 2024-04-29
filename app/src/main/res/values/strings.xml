@@ -15,4 +15,8 @@
     <string name="forget_password_msg">Forget Password?</string>
     <string name="dont_have_an_account_msg">Don’t have an account?</string>
     <string name="register">Register</string>
+    <string name="generic_err_msg">Error please try again later.</string>
+    <string name="loading">Loading</string>
+    <string name="ok">OK</string>
+    <string name="retry">Retry</string>
 </resources>

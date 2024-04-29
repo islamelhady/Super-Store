@@ -13,4 +13,8 @@
     <string name="forget_password_msg">نسيت الرقم السري</string>
     <string name="dont_have_an_account_msg">ليس لدى حساب</string>
     <string name="register">إنشاء حساب</string>
+    <string name="generic_err_msg">خطأ من فضلك حاول مره اخري</string>
+    <string name="loading">جاري التحميل…</string>
+    <string name="ok">موافق</string>
+    <string name="retry">حاول مره اخري</string>
 </resources>
