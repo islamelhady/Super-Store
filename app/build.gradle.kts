@@ -69,7 +69,9 @@ dependencies {
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.firestore.ktx)
-    implementation(libs.firebase.auth)
+    implementation(libs.firebase.auth.ktx)
+    // for the Google Play services library
+    implementation(libs.play.services.auth)
 
     // third party libraries - reactive network
     implementation(libs.reactivenetwork)
