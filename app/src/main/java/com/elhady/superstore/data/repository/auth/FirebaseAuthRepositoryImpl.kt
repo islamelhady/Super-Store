@@ -6,6 +6,7 @@ import com.elhady.superstore.data.model.UserDetailsModel
 import com.elhady.superstore.utils.CrashlyticsUtils
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -21,7 +22,12 @@ class FirebaseAuthRepositoryImpl(
     override suspend fun loginWithEmailAndPassword(email: String, password: String) =
         login(AuthProvider.EMAIL) { auth.signInWithEmailAndPassword(email, password).await() }
 
-
+    override suspend fun loginWithGoogle(idToken: String): Flow<Resource<UserDetailsModel>> {
+        return login(AuthProvider.GOOGLE){
+            val credential = GoogleAuthProvider.getCredential(idToken, null)
+            auth.signInWithCredential(credential).await()
+        }
+    }
     private suspend fun login(
         provider: AuthProvider,
         signInRequest: suspend () -> AuthResult,
