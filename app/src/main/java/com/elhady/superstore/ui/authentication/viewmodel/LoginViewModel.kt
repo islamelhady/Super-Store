@@ -12,8 +12,6 @@ import com.elhady.superstore.data.repository.auth.FirebaseAuthRepository
 import com.elhady.superstore.data.repository.auth.FirebaseAuthRepositoryImpl
 import com.elhady.superstore.data.repository.common.AppDataStoreRepositoryImpl
 import com.elhady.superstore.data.repository.common.AppPreferenceRepository
-import com.elhady.superstore.data.repository.user.UserPreferenceRepository
-import com.elhady.superstore.data.repository.user.UserPreferenceRepositoryImpl
 import com.elhady.superstore.utils.isValidEmail
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -27,7 +25,6 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel(
     private val appPreferenceRepository: AppPreferenceRepository,
-    private val userPreferenceRepository: UserPreferenceRepository,
     private val authRepository: FirebaseAuthRepository
 ) : ViewModel() {
 
@@ -78,15 +75,13 @@ class LoginViewModelFactory(
 ) : ViewModelProvider.Factory {
 
     private val appPreferenceRepository = AppDataStoreRepositoryImpl(AppPreferencesDataSource(contextValue))
-    private val userPreferenceRepository = UserPreferenceRepositoryImpl(contextValue)
     private val authRepository = FirebaseAuthRepositoryImpl()
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST") return LoginViewModel(
                 appPreferenceRepository,
-                userPreferenceRepository,
-                authRepository,
+                authRepository
             ) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
