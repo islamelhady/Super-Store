@@ -1,3 +1,5 @@
+import java.util.Properties
+
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.androidApplication)
@@ -22,6 +24,9 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    val properties = Properties()
+    properties.load(project.rootProject.file("local.properties").inputStream())
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -30,7 +35,12 @@ android {
                 "proguard-rules.pro"
             )
         }
+        forEach {
+            it.buildConfigField("String", "WEB_CLIENT_ID", "\"${properties.getProperty("WEB_CLIENT_ID")}\"")
+        }
     }
+
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8

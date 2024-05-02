@@ -12,7 +12,20 @@
           "package_name": "com.elhady.superstore"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "463623305926-jhqqgv7ghenndu7k7f60452comg5unnv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.elhady.superstore",
+            "certificate_hash": "536396c56cc1530f5b53cfdc8029a36769ceca8f"
+          }
+        },
+        {
+          "client_id": "463623305926-dsccrnjqusr49utl0e4uuvpf61qq5q21.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyA3K-iigqB7dxdhPWHXtUkGrxaLqB2SAjc"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "463623305926-dsccrnjqusr49utl0e4uuvpf61qq5q21.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
