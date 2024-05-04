@@ -5,6 +5,7 @@ import com.elhady.superstore.data.model.Resource
 import com.elhady.superstore.data.model.UserDetailsModel
 import com.elhady.superstore.utils.CrashlyticsUtils
 import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
@@ -25,6 +26,13 @@ class FirebaseAuthRepositoryImpl(
     override suspend fun loginWithGoogle(idToken: String): Flow<Resource<UserDetailsModel>> {
         return login(AuthProvider.GOOGLE){
             val credential = GoogleAuthProvider.getCredential(idToken, null)
+            auth.signInWithCredential(credential).await()
+        }
+    }
+
+    override suspend fun loginWithFacebook(token: String): Flow<Resource<UserDetailsModel>> {
+        return login(AuthProvider.FACEBOOk){
+            val credential = FacebookAuthProvider.getCredential(token)
             auth.signInWithCredential(credential).await()
         }
     }

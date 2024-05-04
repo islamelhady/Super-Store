@@ -21,6 +21,12 @@ import com.elhady.superstore.ui.authentication.viewmodel.LoginViewModelFactory
 import com.elhady.superstore.ui.common.ProgressDialog.Companion.createProgressDialog
 import com.elhady.superstore.ui.home.showSnakeBarError
 import com.elhady.superstore.utils.CrashlyticsUtils
+import com.facebook.AccessToken
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
@@ -30,12 +36,11 @@ import javax.security.auth.login.LoginException
 
 class LoginFragment : Fragment() {
 
-
-    private val loginViewModel: LoginViewModel by viewModels(){
-        LoginViewModelFactory(requireContext())
-    }
     private lateinit var binding: FragmentLoginBinding
+    private val loginViewModel: LoginViewModel by viewModels(){ LoginViewModelFactory(requireContext()) }
     private val progressDialog by lazy { createProgressDialog(requireActivity()) }
+    private val loginManager: LoginManager by lazy { LoginManager.getInstance() }
+    private val callbackManager: CallbackManager by lazy { CallbackManager.Factory.create() }
 
 
     override fun onCreateView(
@@ -83,6 +88,10 @@ class LoginFragment : Fragment() {
         binding.googleSignInBtn.setOnClickListener {
             loginWithGoogleRequest()
         }
+
+        binding.facebookSignInBtn.setOnClickListener {
+            loginWithFacebook()
+        }
     }
     private fun loginWithGoogleRequest() {
         val signInIntent = getGoogleRequestIntent(requireActivity())
@@ -110,6 +119,43 @@ class LoginFragment : Fragment() {
         }
     }
 
+    private fun isLoggedIn(): Boolean {
+        val accessToken = AccessToken.getCurrentAccessToken()
+        return accessToken != null && !accessToken.isExpired
+    }
+
+    private fun loginWithFacebook() {
+        if (isLoggedIn()) signOut()
+        loginManager.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
+            override fun onSuccess(result: LoginResult) {
+                val token = result.accessToken.token
+                Log.d(TAG, "onSuccess: $token")
+                firebaseAuthWithFacebook(token)
+            }
+
+            override fun onCancel() {
+                // Handle login cancel
+            }
+
+            override fun onError(error: FacebookException) {
+                // Handle login error
+                val msg = error.message ?: getString(R.string.generic_err_msg)
+                Log.d(TAG, "onError: $msg")
+                view?.showSnakeBarError(msg)
+                logAuthIssueToCrashlytics(msg, "Facebook")
+            }
+        })
+
+        loginManager.logInWithReadPermissions(
+            this, callbackManager, listOf("email", "public_profile")
+        )
+    }
+
+    private fun signOut() {
+        loginManager.logOut()
+        Log.d(TAG, "signOut: ")
+    }
+
     private fun logAuthIssueToCrashlytics(msg: String, provider: String) {
         CrashlyticsUtils.sendCustomLogToCrashlytics<LoginException>(
             msg,
@@ -119,6 +165,10 @@ class LoginFragment : Fragment() {
     }
     private fun firebaseAuthWithGoogle(idToken: String) {
         loginViewModel.loginWithGoogle(idToken)
+    }
+
+    private fun firebaseAuthWithFacebook(accessToken: String) {
+        loginViewModel.loginWithFacebook(accessToken)
     }
     private fun goToHome() {
         requireActivity().startActivity(Intent(activity, MainActivity::class.java).apply {
