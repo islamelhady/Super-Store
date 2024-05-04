@@ -82,6 +82,7 @@ dependencies {
     implementation(libs.firebase.auth.ktx)
     // for the Google Play services library
     implementation(libs.play.services.auth)
+    implementation(libs.facebook)
 
     // third party libraries - reactive network
     implementation(libs.reactivenetwork)
