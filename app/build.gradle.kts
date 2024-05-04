@@ -37,6 +37,9 @@ android {
         }
         forEach {
             it.buildConfigField("String", "WEB_CLIENT_ID", "\"${properties.getProperty("WEB_CLIENT_ID")}\"")
+            it.resValue("string", "facebook_app_id", "\"${properties.getProperty("facebook_app_id")}\"")
+            it.resValue("string", "fb_login_protocol_scheme", "\"${properties.getProperty("fb_login_protocol_scheme")}\"")
+            it.resValue("string", "facebook_client_token", "\"${properties.getProperty("faccbook_client_token")}\"")
         }
     }
 
