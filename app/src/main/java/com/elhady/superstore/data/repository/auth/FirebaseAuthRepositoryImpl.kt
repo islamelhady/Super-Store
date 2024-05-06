@@ -24,18 +24,19 @@ class FirebaseAuthRepositoryImpl(
         login(AuthProvider.EMAIL) { auth.signInWithEmailAndPassword(email, password).await() }
 
     override suspend fun loginWithGoogle(idToken: String): Flow<Resource<UserDetailsModel>> {
-        return login(AuthProvider.GOOGLE){
+        return login(AuthProvider.GOOGLE) {
             val credential = GoogleAuthProvider.getCredential(idToken, null)
             auth.signInWithCredential(credential).await()
         }
     }
 
     override suspend fun loginWithFacebook(token: String): Flow<Resource<UserDetailsModel>> {
-        return login(AuthProvider.FACEBOOk){
+        return login(AuthProvider.FACEBOOk) {
             val credential = FacebookAuthProvider.getCredential(token)
             auth.signInWithCredential(credential).await()
         }
     }
+
     private suspend fun login(
         provider: AuthProvider,
         signInRequest: suspend () -> AuthResult,
@@ -83,6 +84,49 @@ class FirebaseAuthRepositoryImpl(
                 e.message ?: "Unknown error from exception = ${e::class.java}", provider.name
             )
             emit(Resource.Error(e)) // Emit error
+        }
+    }
+
+    override suspend fun registerWithEmailAndPassword(
+        name: String,
+        email: String,
+        password: String
+    ): Flow<Resource<UserDetailsModel>> {
+        return flow {
+            try {
+                emit(Resource.Loading())
+                // firebase auth sign up request
+                val authResult = auth.createUserWithEmailAndPassword(email, password).await()
+                val userId = authResult.user?.uid
+
+                if (userId == null) {
+                    logAuthIssueToCrashlytics(
+                        msg = "Sign up UserID not found",
+                        provider = AuthProvider.EMAIL.name
+                    )
+                    emit(Resource.Error(Exception("Sign up UserID not found")))
+                    return@flow
+                }
+
+                // create user in firestore
+                val user = UserDetailsModel(
+                    name = name,
+                    email = email,
+                    id = userId,
+                    createdAt = System.currentTimeMillis()
+                )
+                firestore.collection("users").document(userId).set(user).await()
+
+                // send verification email
+                authResult.user?.sendEmailVerification()?.await()
+                emit(Resource.Success(user))
+            } catch (e: Exception) {
+                logAuthIssueToCrashlytics(
+                    e.message ?: "Unknown error from exception = ${e::class.java}",
+                    AuthProvider.EMAIL.name
+                )
+                emit(Resource.Error(e)) // Emit error
+            }
         }
     }
 
