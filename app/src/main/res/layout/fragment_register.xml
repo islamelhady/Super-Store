@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.elhady.superstore.ui.authentication.viewmodel.RegisterViewModel" />
     </data>
 
     <ScrollView
@@ -48,6 +50,7 @@
                 android:layout_height="48dp"
                 android:layout_marginTop="36dp"
                 android:gravity="center_vertical"
+                android:text="@={viewModel.name}"
                 android:drawableStart="@drawable/ic_name"
                 android:hint="@string/name_et_hint"
                 android:inputType="textEmailAddress" />
@@ -57,6 +60,7 @@
                 style="@style/EditTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:text="@={viewModel.email}"
                 android:layout_marginTop="8dp"
                 android:drawableStart="@drawable/ic_email"
                 android:gravity="center_vertical"
@@ -69,6 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="8dp"
+                android:text="@={viewModel.password}"
                 android:gravity="center_vertical"
                 android:drawableStart="@drawable/ic_password"
                 android:hint="@string/password_et_hint"
@@ -81,6 +86,7 @@
                 android:layout_height="48dp"
                 android:layout_marginTop="8dp"
                 android:gravity="center_vertical"
+                android:text="@={viewModel.confirmPassword}"
                 android:drawableStart="@drawable/ic_password"
                 android:hint="@string/password_again_et_hint"
                 android:inputType="textPassword" />
@@ -89,6 +95,7 @@
                 android:id="@+id/login_btn"
                 style="@style/PrimaryButtonStyle"
                 android:layout_marginTop="16dp"
+                android:onClickListener="@{() -> viewModel.registerWithEmailAndPassword()}"
                 android:text="@string/sign_up" />
 
             <RelativeLayout
