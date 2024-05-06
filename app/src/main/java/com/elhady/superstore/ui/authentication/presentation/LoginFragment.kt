@@ -11,6 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.elhady.superstore.MainActivity
 import com.elhady.superstore.R
 import com.elhady.superstore.data.model.Resource
@@ -84,13 +85,17 @@ class LoginFragment : Fragment() {
         }
     }
 
-    fun initListeners() {
+    private fun initListeners() {
         binding.googleSignInBtn.setOnClickListener {
             loginWithGoogleRequest()
         }
 
         binding.facebookSignInBtn.setOnClickListener {
             loginWithFacebook()
+        }
+
+        binding.registerTv.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
     }
     private fun loginWithGoogleRequest() {

@@ -18,5 +18,13 @@
     <string name="ok">موافق</string>
     <string name="retry">حاول مره اخري</string>
     <string name="google_sign_in_field_msg">فشل الدخول حاول مره اخرى</string>
+    <string name="register_welcome_msg">يالا بينا</string>
+    <string name="sign_up_msg">إنشاء حساب  جديد</string>
+    <string name="name_et_hint">الاسم بالكامل</string>
+    <string name="password_again_et_hint">كلمة السر مره اخري</string>
+    <string name="sign_up">إنشاء حساب</string>
+    <string name="google_signup_btn_msg">إنشاء حساب  بجوجل</string>
+    <string name="facebook_signup_btn_msg">بفيسبوك حساب  انشاء</string>
+    <string name="have_an_account_msg">لدى حساب</string>
 
 </resources>

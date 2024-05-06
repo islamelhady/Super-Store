@@ -20,4 +20,12 @@
     <string name="ok">OK</string>
     <string name="retry">Retry</string>
     <string name="google_sign_in_field_msg">Google sign in failed, please retry again later.</string>
+    <string name="register_welcome_msg">Lest\'s Go</string>
+    <string name="sign_up_msg">Create a new account</string>
+    <string name="name_et_hint">Full name</string>
+    <string name="password_again_et_hint">Password again</string>
+    <string name="sign_up">Sgin up</string>
+    <string name="google_signup_btn_msg">Sgin up with google</string>
+    <string name="facebook_signup_btn_msg">Sign with facebook</string>
+    <string name="have_an_account_msg">have an account</string>
 </resources>
