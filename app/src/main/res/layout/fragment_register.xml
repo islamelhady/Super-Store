@@ -123,7 +123,7 @@
             </RelativeLayout>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/google_signup_btn"
+                android:id="@+id/google_register_btn"
                 style="@style/SocialButtonStyle"
                 android:drawableStart="@drawable/ic_google"
                 android:text="@string/google_signup_btn_msg" />

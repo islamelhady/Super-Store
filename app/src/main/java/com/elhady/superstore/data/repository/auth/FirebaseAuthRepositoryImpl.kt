@@ -130,6 +130,45 @@ class FirebaseAuthRepositoryImpl(
         }
     }
 
+    override suspend fun registerWithGoogle(idToken: String): Flow<Resource<UserDetailsModel>> {
+        return flow {
+            try {
+                emit(Resource.Loading())
+                val credential = GoogleAuthProvider.getCredential(idToken, null)
+                val authResult = auth.signInWithCredential(credential).await()
+                val userId = authResult.user?.uid
+
+                if (userId == null) {
+                    logAuthIssueToCrashlytics(
+                        msg = "Sign up UserID not found",
+                        provider = AuthProvider.GOOGLE.name
+                    )
+                    emit(Resource.Error(Exception("Sign up UserID not found")))
+                    return@flow
+                }
+
+                // create user in firestore
+                val user = UserDetailsModel(
+                    name = authResult.user?.displayName ?: "",
+                    email = authResult.user?.email ?: "",
+                    id = userId,
+                    createdAt = System.currentTimeMillis()
+                    )
+
+                // Add user to firestore
+                firestore.collection("users").document(userId).set(user).await()
+                emit(Resource.Success(user))
+
+            }catch (e: Exception){
+                logAuthIssueToCrashlytics(
+                    e.message ?: "Unknown error from exception = ${e::class.java}",
+                    AuthProvider.GOOGLE.name
+                )
+                emit(Resource.Error(e)) // Emit error
+            }
+        }
+    }
+
     private fun logAuthIssueToCrashlytics(msg: String, provider: String) {
         CrashlyticsUtils.sendCustomLogToCrashlytics<LoginException>(
             msg,

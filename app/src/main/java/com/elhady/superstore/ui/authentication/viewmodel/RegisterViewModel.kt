@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
-class RegisterViewModel(val firebaseAuthRepository: FirebaseAuthRepository) : ViewModel() {
+class RegisterViewModel(private val firebaseAuthRepository: FirebaseAuthRepository) : ViewModel() {
 
     private val _registerState = MutableSharedFlow<Resource<UserDetailsModel>>()
     val registerState = _registerState.asSharedFlow()
@@ -46,6 +46,14 @@ class RegisterViewModel(val firebaseAuthRepository: FirebaseAuthRepository) : Vi
                     }
             } else {
                 _registerState.emit(Resource.Error(message = Exception("Please check your inputs")))
+            }
+        }
+    }
+
+    fun registerWithGoogle(idToken: String) {
+        viewModelScope.launch(IO) {
+            firebaseAuthRepository.registerWithGoogle(idToken).collect {
+                _registerState.emit(it)
             }
         }
     }
