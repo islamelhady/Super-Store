@@ -29,9 +29,8 @@ fun View.showLoginSuccessDialog() {
         .setMessage("We have sent you an email verification link. Please verify your email to login.")
         .setPositiveButton(
             "OK"
-        ) { dialog, which ->
+        ) { dialog, _ ->
             dialog?.dismiss()
-            this.findNavController().popBackStack()
         }.create().show()
 }
 
@@ -40,8 +39,7 @@ fun View.showSentEmailSuccessDialog() {
         .setMessage("We have sent you an email to reset your password. Please check your email.")
         .setPositiveButton(
             "OK"
-        ) { dialog, which ->
+        ) { dialog, _ ->
             dialog?.dismiss()
-            this.findNavController().popBackStack()
         }.create().show()
 }
