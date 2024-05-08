@@ -15,6 +15,9 @@ interface FirebaseAuthRepository {
     suspend fun registerWithEmailAndPassword(name: String, email: String, password: String): Flow<Resource<UserDetailsModel>>
 
     suspend fun registerWithGoogle(idToken: String): Flow<Resource<UserDetailsModel>>
+
     suspend fun registerWithFacebook(idToken: String): Flow<Resource<UserDetailsModel>>
+
+    suspend fun passwordResetEmailSend(email: String): Flow<Resource<String>>
 
 }
