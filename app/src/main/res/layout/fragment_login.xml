@@ -117,7 +117,7 @@
                 style="@style/MediumPrimaryTextViewStyle"
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
-                android:text="@string/forget_password_msg" />
+                android:text="@string/forget_password" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
