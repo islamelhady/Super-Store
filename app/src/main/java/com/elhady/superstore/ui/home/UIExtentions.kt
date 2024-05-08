@@ -34,3 +34,14 @@ fun View.showLoginSuccessDialog() {
             this.findNavController().popBackStack()
         }.create().show()
 }
+
+fun View.showSentEmailSuccessDialog() {
+    MaterialAlertDialogBuilder(this.context).setTitle("Reset Password")
+        .setMessage("We have sent you an email to reset your password. Please check your email.")
+        .setPositiveButton(
+            "OK"
+        ) { dialog, which ->
+            dialog?.dismiss()
+            this.findNavController().popBackStack()
+        }.create().show()
+}
