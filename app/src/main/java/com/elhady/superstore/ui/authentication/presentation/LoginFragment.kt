@@ -22,6 +22,7 @@ import com.elhady.superstore.ui.authentication.viewmodel.LoginViewModelFactory
 import com.elhady.superstore.ui.common.ProgressDialog.Companion.createProgressDialog
 import com.elhady.superstore.ui.home.showSnakeBarError
 import com.elhady.superstore.utils.CrashlyticsUtils
+import com.elhady.superstore.utils.LoginException
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
@@ -33,7 +34,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.launch
-import javax.security.auth.login.LoginException
 
 class LoginFragment : Fragment() {
 

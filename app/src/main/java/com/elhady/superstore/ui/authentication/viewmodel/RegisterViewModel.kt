@@ -57,6 +57,14 @@ class RegisterViewModel(private val firebaseAuthRepository: FirebaseAuthReposito
             }
         }
     }
+
+    fun registerWithFacebook(accessToken: String) {
+        viewModelScope.launch(IO) {
+            firebaseAuthRepository.registerWithFacebook(accessToken).collect {
+                _registerState.emit(it)
+            }
+        }
+    }
 }
 
 class RegisterViewModelFactory(context: Context) : ViewModelProvider.Factory {

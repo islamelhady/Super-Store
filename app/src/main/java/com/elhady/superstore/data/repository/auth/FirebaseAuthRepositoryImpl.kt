@@ -31,7 +31,7 @@ class FirebaseAuthRepositoryImpl(
     }
 
     override suspend fun loginWithFacebook(token: String): Flow<Resource<UserDetailsModel>> {
-        return login(AuthProvider.FACEBOOk) {
+        return login(AuthProvider.FACEBOOK) {
             val credential = FacebookAuthProvider.getCredential(token)
             auth.signInWithCredential(credential).await()
         }
@@ -163,6 +163,46 @@ class FirebaseAuthRepositoryImpl(
                 logAuthIssueToCrashlytics(
                     e.message ?: "Unknown error from exception = ${e::class.java}",
                     AuthProvider.GOOGLE.name
+                )
+                emit(Resource.Error(e)) // Emit error
+            }
+        }
+    }
+
+    override suspend fun registerWithFacebook(idToken: String): Flow<Resource<UserDetailsModel>> {
+        return flow {
+            try {
+                emit(Resource.Loading())
+                // firebase auth sign up request
+                val credential = FacebookAuthProvider.getCredential(idToken)
+                val authResult = auth.signInWithCredential(credential).await()
+                val userId = authResult.user?.uid
+
+                if (userId == null) {
+                    logAuthIssueToCrashlytics(
+                        msg = "Sign up UserID not found",
+                        provider = AuthProvider.FACEBOOK.name
+                    )
+                    emit(Resource.Error(Exception("Sign up UserID not found")))
+                    return@flow
+                }
+
+                // create user in firestore
+                val user = UserDetailsModel(
+                    name = authResult.user?.displayName ?: "",
+                    email = authResult.user?.email ?: "",
+                    id = userId,
+                    createdAt = System.currentTimeMillis()
+                )
+
+                // Add user to firestore
+                firestore.collection("users").document(userId).set(user).await()
+                emit(Resource.Success(user))
+
+            }catch (e: Exception){
+                logAuthIssueToCrashlytics(
+                    e.message ?: "Unknown error from exception = ${e::class.java}",
+                    AuthProvider.FACEBOOK.name
                 )
                 emit(Resource.Error(e)) // Emit error
             }

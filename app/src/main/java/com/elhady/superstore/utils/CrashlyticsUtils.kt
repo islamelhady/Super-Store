@@ -17,6 +17,7 @@ object CrashlyticsUtils {
     const val LOGIN_KEY = "LOGIN_KEY"
     const val LOGIN_PROVIDER = "LOGIN_PROVIDER"
     const val REGISTER_KEY = "REGISTER_KEY"
+    const val REGISTER_PROVIDER = "REGISTER_PROVIDER"
 
 
     fun sendLogToCrashlytics(msg: String, vararg keys: String) {

@@ -23,6 +23,12 @@ import com.elhady.superstore.ui.home.showLoginSuccessDialog
 import com.elhady.superstore.ui.home.showSnakeBarError
 import com.elhady.superstore.utils.CrashlyticsUtils
 import com.elhady.superstore.utils.RegisterException
+import com.facebook.AccessToken
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
@@ -34,6 +40,8 @@ class RegisterFragment : Fragment() {
     private lateinit var binding: FragmentRegisterBinding
     private val viewModel: RegisterViewModel by viewModels { RegisterViewModelFactory(context = requireActivity()) }
     private val progressDialog by lazy { ProgressDialog.createProgressDialog(requireActivity()) }
+    private val loginManager by lazy { LoginManager.getInstance() }
+    private val callbackManager by lazy { CallbackManager.Factory.create() }
 
 
     override fun onCreateView(
@@ -78,6 +86,20 @@ class RegisterFragment : Fragment() {
         }
     }
 
+    private fun initListener() {
+        binding.signInTv.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+        binding.googleSignupBtn.setOnClickListener {
+            signInWithGoogleRequest()
+        }
+
+        binding.facebookSignupBtn.setOnClickListener {
+            registerWithFacebookRequest()
+        }
+    }
+
     private fun firebaseAuthWithGoogle(idToken: String) {
         viewModel.registerWithGoogle(idToken)
     }
@@ -97,7 +119,7 @@ class RegisterFragment : Fragment() {
         }
     }
 
-    fun handelSignInResult(completedTask: Task<GoogleSignInAccount>) {
+    private fun handelSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
             val account = completedTask.getResult(ApiException::class.java)
             firebaseAuthWithGoogle(account.idToken!!)
@@ -109,22 +131,48 @@ class RegisterFragment : Fragment() {
         }
     }
 
+    fun firebaseAuthWithFacebook(token: String) {
+        viewModel.registerWithFacebook(token)
+    }
+
+    private fun isLoggedIn(): Boolean {
+        val accessToken = AccessToken.getCurrentAccessToken()
+        return accessToken != null && !accessToken.isExpired
+    }
+
+    fun registerWithFacebookRequest() {
+        if (isLoggedIn()) signOut()
+        loginManager.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
+            override fun onCancel() {
+                TODO("Not yet implemented")
+            }
+
+            override fun onError(error: FacebookException) {
+                val msg = error.message ?: getString(R.string.generic_err_msg)
+                Log.e(TAG, "registerWithFacebookRequest: $msg")
+                view?.showSnakeBarError(msg)
+                logAuthIssueToCrashlytics(msg, AuthProvider.FACEBOOK.name)
+            }
+
+            override fun onSuccess(result: LoginResult) {
+                val token = result.accessToken.token
+                Log.d(TAG, "facebook:onSuccess:$token")
+                firebaseAuthWithFacebook(result.accessToken.token)
+            }
+        })
+    }
+
+    private fun signOut() {
+        loginManager.logOut()
+    }
+
     private fun logAuthIssueToCrashlytics(msg: String, provide: String) {
         CrashlyticsUtils.sendCustomLogToCrashlytics<RegisterException>(
             msg,
-            CrashlyticsUtils.REGISTER_KEY to msg
+            CrashlyticsUtils.REGISTER_KEY to msg,
+            CrashlyticsUtils.REGISTER_PROVIDER to provide
         )
         Log.e(TAG, "registerWithGoogle: $msg")
-    }
-
-    private fun initListener() {
-        binding.signInTv.setOnClickListener {
-            findNavController().popBackStack()
-        }
-
-        binding.googleRegisterBtn.setOnClickListener {
-            signInWithGoogleRequest()
-        }
     }
 
     companion object {
