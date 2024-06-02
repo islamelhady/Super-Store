@@ -1,25 +1,85 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.SuperStore" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/app_background</item>
-        <item name="colorPrimaryVariant">@color/screen_background</item>
-        <item name="colorOnPrimary">@color/app_background</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/secondary_text</item>
-        <item name="colorSecondaryVariant">@color/secondary_text</item>
-        <item name="colorOnSecondary">@color/fab_back</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/app_background</item>
+    <style name="Base.Theme.SuperStore" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="android:colorAccent">@color/primary_color</item>
+        <item name="android:colorPrimaryDark">@color/primary_color</item>
 
+        <!-- System UI Configurations-->
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:windowLightStatusBar">true</item> <!-- For making status bar content color dark -->
+        <item name="android:navigationBarColor">@android:color/white</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>  <!-- For making Navigation bar content color dark -->
     </style>
 
-    <style name="Theme.App.Starting" parent="Theme.SuperStore">
-        <!-- Set the splash screen background, animated icon, and animation duration. -->
-        <item name="windowSplashScreenBackground">@color/app_background</item>
+    <!-- Splash screen. -->
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
         <item name="android:windowBackground">@drawable/splash_image</item>
-        <!--        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_foreground</item> &lt;!&ndash; To add a drawable or an animated drawable. One of these is required. &ndash;&gt;-->
+        <!-- System UI Configurations-->
+        <item name="android:statusBarColor">@color/primary_color</item>
+        <item name="android:windowLightStatusBar">false</item> <!-- For making status bar content color dark -->
+        <item name="android:navigationBarColor">@color/primary_color</item>
+<!--        <item name="android:windowSplashScreenBrandingImage">@drawable/splash_image</item> &lt;!&ndash; to set an image to be shown at the bottom of the splash screen. &ndash;&gt;-->
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>  <!-- For making Navigation bar content color dark -->
+        <item name="windowSplashScreenBackground">@color/primary_color</item> <!-- Set the splash screen background, animated icon, and animation duration. -->
         <item name="windowSplashScreenAnimationDuration">200</item> <!-- Required for animated icons. -->
-        <item name="postSplashScreenTheme">@style/Theme.SuperStore</item> <!-- Set the theme of the Activity that directly follows your splash screen. This is required. -->
+        <item name="postSplashScreenTheme">@style/Base.Theme.SuperStore</item> <!-- Set the theme of the Activity that directly follows your splash screen. This is required. -->
+    </style>
+
+
+    <style name="TitleTextStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/primary_color</item>
+        <item name="fontFamily">@font/poppins_bold</item>
+    </style>
+
+    <style name="MessageTextStyle">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/neutral_grey</item>
+        <item name="fontFamily">@font/poppins_regular</item>
+    </style>
+
+    <style name="EditTextStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/neutral_grey</item>
+        <item name="hintTextColor">@color/neutral_grey</item>
+        <item name="android:background">@drawable/edit_text_bg</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:drawablePadding">8dp</item>
+        <item name="android:fontFamily">@font/poppins_light</item>
+    </style>
+
+    <style name="PrimaryButtonStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:background">@drawable/primary_button_bg</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/poppins_bold</item>
+    </style>
+
+    <style name="SocialButtonStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:background">@drawable/edit_text_bg</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/primary_color</item>
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:padding">16dp</item>
+    </style>
+
+    <style name="MediumPrimaryTextViewStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textColor">@color/primary_color</item>
+        <item name="android:textSize">14sp</item>
     </style>
 </resources>

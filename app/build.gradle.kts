@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.googleServices)
     alias(libs.plugins.googleCrashlytics)
     alias(libs.plugins.kotlinKapt)
+    alias(libs.plugins.kotlinParcelize)
 }
 
 android {
@@ -49,10 +50,16 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
+
+    // Lifecycle
     implementation(libs.lifecycle.livedata.ktx)
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.navigation.fragment.ktx)
+    implementation(libs.activity.ktx)
     implementation(libs.navigation.ui.ktx)
+
+    // Data Store
+    implementation(libs.datastore)
 
     // splash
     implementation(libs.splash.screen)
@@ -61,9 +68,12 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.firestore.ktx)
+    implementation(libs.firebase.auth)
 
-    // third party libraries - reactivenetwork
+    // third party libraries - reactive network
     implementation(libs.reactivenetwork)
+    implementation(libs.legacy.support.v4)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
