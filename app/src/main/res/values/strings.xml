@@ -4,7 +4,7 @@
     <string name="title_dashboard" translatable="false">Dashboard</string>
     <string name="title_notifications" translatable="false">Notifications</string>
     <string name="title_activity_authentication" translatable="false">AuthenticationActivity</string>
-    <string name="auth_welcome_msg">Welcome to E-Commerce</string>
+    <string name="auth_welcome_msg">Welcome to Super Store</string>
     <string name="sign_in_msg">Sign in to continue</string>
     <string name="email_et_hint">Your Email</string>
     <string name="password_et_hint">Password</string>
@@ -19,4 +19,5 @@
     <string name="loading">Loading</string>
     <string name="ok">OK</string>
     <string name="retry">Retry</string>
+    <string name="google_sign_in_field_msg">Google sign in failed, please retry again later.</string>
 </resources>

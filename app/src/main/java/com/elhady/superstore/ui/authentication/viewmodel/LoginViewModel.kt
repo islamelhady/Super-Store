@@ -48,6 +48,14 @@ class LoginViewModel(
         }
     }
 
+    fun loginWithGoogle(idToken: String) = viewModelScope.launch(Dispatchers.IO) {
+        handleLoginFlow { authRepository.loginWithGoogle(idToken) }
+    }
+
+    fun loginWithFacebook(accessToken: String) {
+        handleLoginFlow { authRepository.loginWithFacebook(accessToken) }
+    }
+
     private fun handleLoginFlow(loginFlow: suspend () -> Flow<Resource<UserDetailsModel>>) =
         viewModelScope.launch(Dispatchers.IO) {
             loginFlow().collect { resource ->

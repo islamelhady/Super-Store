@@ -48,3 +48,4 @@ object CrashlyticsUtils {
 
 class CustomCrashlyticsLogException(message: String) : Exception(message)
 class AddToCartException(message: String) : Exception(message)
+class LoginException(message: String) : Exception(message)

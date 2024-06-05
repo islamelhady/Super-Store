@@ -17,10 +17,12 @@ google-services = "4.4.1"
 firebase-bom = "32.8.1"
 firebase-crashlytics = "2.9.9"
 firebase-firestore-ktx = "25.0.0"
+play-services-auth = "21.2.0"
 reactivenetwork = "3.0.8"
 legacy-support-v4 = "1.0.0"
 data-store = "1.0.0"
 activity-ktx = "1.8.2"
+facebook = "16.0.0"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -40,10 +42,13 @@ splash-screen = {group = "androidx.core", name = "core-splashscreen", version.re
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
-firebase-auth  = { group = "com.google.firebase", name = "firebase-auth-ktx"}
+firebase-auth-ktx  = { group = "com.google.firebase", name = "firebase-auth-ktx"}
 firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebase-firestore-ktx" }
 reactivenetwork = { group = "com.github.pwittchen", name = "reactivenetwork-rx2", version.ref = "reactivenetwork" }
 legacy-support-v4 = { group = "androidx.legacy", name = "legacy-support-v4", version.ref = "legacy-support-v4" }
+play-services-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "play-services-auth"  }
+facebook = {group = "com.facebook.android", name = "facebook-android-sdk", version.ref = "facebook"}
+
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

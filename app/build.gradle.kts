@@ -1,3 +1,5 @@
+import java.util.Properties
+
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.androidApplication)
@@ -22,6 +24,9 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    val properties = Properties()
+    properties.load(project.rootProject.file("local.properties").inputStream())
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -30,7 +35,15 @@ android {
                 "proguard-rules.pro"
             )
         }
+        forEach {
+            it.buildConfigField("String", "WEB_CLIENT_ID", "\"${properties.getProperty("WEB_CLIENT_ID")}\"")
+            it.resValue("string", "facebook_app_id", "\"${properties.getProperty("facebook_app_id")}\"")
+            it.resValue("string", "fb_login_protocol_scheme", "\"${properties.getProperty("fb_login_protocol_scheme")}\"")
+            it.resValue("string", "facebook_client_token", "\"${properties.getProperty("faccbook_client_token")}\"")
+        }
     }
+
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -69,7 +82,10 @@ dependencies {
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.firestore.ktx)
-    implementation(libs.firebase.auth)
+    implementation(libs.firebase.auth.ktx)
+    // for the Google Play services library
+    implementation(libs.play.services.auth)
+    implementation(libs.facebook)
 
     // third party libraries - reactive network
     implementation(libs.reactivenetwork)
