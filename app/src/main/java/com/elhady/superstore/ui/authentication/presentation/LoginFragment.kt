@@ -11,6 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.elhady.superstore.MainActivity
 import com.elhady.superstore.R
 import com.elhady.superstore.data.model.Resource
@@ -21,6 +22,7 @@ import com.elhady.superstore.ui.authentication.viewmodel.LoginViewModelFactory
 import com.elhady.superstore.ui.common.ProgressDialog.Companion.createProgressDialog
 import com.elhady.superstore.ui.home.showSnakeBarError
 import com.elhady.superstore.utils.CrashlyticsUtils
+import com.elhady.superstore.utils.LoginException
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
@@ -32,7 +34,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.launch
-import javax.security.auth.login.LoginException
 
 class LoginFragment : Fragment() {
 
@@ -84,13 +85,22 @@ class LoginFragment : Fragment() {
         }
     }
 
-    fun initListeners() {
+    private fun initListeners() {
         binding.googleSignInBtn.setOnClickListener {
             loginWithGoogleRequest()
         }
 
         binding.facebookSignInBtn.setOnClickListener {
             loginWithFacebook()
+        }
+
+        binding.registerTv.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+        }
+
+        binding.forgotPasswordTv.setOnClickListener {
+            val forgetPasswordFragment = ForgetPasswordFragment()
+            forgetPasswordFragment.show(childFragmentManager, "ForgetPasswordFragment")
         }
     }
     private fun loginWithGoogleRequest() {

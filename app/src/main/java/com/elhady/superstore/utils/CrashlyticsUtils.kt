@@ -16,6 +16,8 @@ object CrashlyticsUtils {
     const val ADD_TO_CART_KEY = "ADD_TO_CART_KEY"
     const val LOGIN_KEY = "LOGIN_KEY"
     const val LOGIN_PROVIDER = "LOGIN_PROVIDER"
+    const val REGISTER_KEY = "REGISTER_KEY"
+    const val REGISTER_PROVIDER = "REGISTER_PROVIDER"
 
 
     fun sendLogToCrashlytics(msg: String, vararg keys: String) {
@@ -49,3 +51,4 @@ object CrashlyticsUtils {
 class CustomCrashlyticsLogException(message: String) : Exception(message)
 class AddToCartException(message: String) : Exception(message)
 class LoginException(message: String) : Exception(message)
+class RegisterException(message: String) : Exception(message)
